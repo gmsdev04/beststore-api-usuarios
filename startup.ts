@@ -6,14 +6,11 @@ import { InversifyExpressServer, TYPE } from 'inversify-express-utils';
 import { Application } from "express";
 
 import Database from  './configuration/database'
-import  './controller/ideaisDeCadastrosController'
-import  './controller/lojasController'
-import ILojasRepository from './repository/ILojasRepository'
-import LojasRepositoryMongoDb from './repository/impl/lojasRepositoryMongoDb'
-import LojasService from './services/lojasService'
-import IdeaisDeCadastrosService from "./services/ideaisDeCadastrosService";
-import IIdeaisDeCadastrosRepository from "./repository/IIdeaisDeCadastrosRepository";
-import IdeaisDeCadastrosMongoDb from "./repository/impl/ideaisDeCadastrosMongoDb";
+import IUsuariosRepository from './repository/IUsuariosRepository'
+import UsuariosRepositoryMongoDb from './repository/impl/UsuariosRepositoryMongoDb'
+import UsuariosService from './services/usuariosService'
+
+require('./controller/usuariosController')
 
 
 class StartUp{
@@ -39,10 +36,8 @@ class StartUp{
     }
 
     configureDependencyInjection(){
-        this.container.bind<ILojasRepository>('ILojasRepository').to(LojasRepositoryMongoDb);
-        this.container.bind<LojasService>('LojasService').to(LojasService);
-        this.container.bind<IIdeaisDeCadastrosRepository>('IIdeaisDeCadastrosRepository').to(IdeaisDeCadastrosMongoDb);
-        this.container.bind<IdeaisDeCadastrosService>('IdeaisDeCadastrosService').to(IdeaisDeCadastrosService);
+        this.container.bind<IUsuariosRepository>('IUsuariosRepository').to(UsuariosRepositoryMongoDb);
+        this.container.bind<UsuariosService>('UsuariosService').to(UsuariosService);
     }
 
     enableCors(app : Application){
